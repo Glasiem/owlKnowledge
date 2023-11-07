@@ -1,0 +1,642 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://test.org/onto.owl"
+         xmlns="http://test.org/onto.owl#"
+         xmlns:owlr="http://www.lesfleursdunormal.fr/static/_downloads/owlready_ontology.owl#">
+
+<owl:Ontology rdf:about="http://test.org/onto.owl"/>
+
+<owl:ObjectProperty rdf:about="#singAsong">
+  <rdfs:domain rdf:resource="#Artist"/>
+  <rdfs:range rdf:resource="#Song"/>
+  <owl:inverseOf rdf:resource="#performedBy"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sing songs</rdfs:label>
+  <owlr:python_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">songs</owlr:python_name>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#performedBy">
+  <rdfs:range rdf:resource="#Artist"/>
+  <rdfs:domain rdf:resource="#Song"/>
+  <owl:inverseOf rdf:resource="#singAsong"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">performed by</rdfs:label>
+  <owlr:python_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">performedBy</owlr:python_name>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#songsInAlbum">
+  <rdfs:domain rdf:resource="#Album"/>
+  <rdfs:range rdf:resource="#Song"/>
+  <owl:inverseOf rdf:resource="#inAlbum"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">songs in album</rdfs:label>
+  <owlr:python_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">songsInAlbum</owlr:python_name>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#inAlbum">
+  <rdfs:range rdf:resource="#Album"/>
+  <rdfs:domain rdf:resource="#Song"/>
+  <owl:inverseOf rdf:resource="#songsInAlbum"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">in album</rdfs:label>
+  <owlr:python_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">inAlbum</owlr:python_name>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#makeAnAlbum">
+  <rdfs:domain rdf:resource="#Artist"/>
+  <rdfs:range rdf:resource="#Album"/>
+  <owl:inverseOf rdf:resource="#madeBy"/>
+  <owlr:python_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">albums</owlr:python_name>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">made albums</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#madeBy">
+  <rdfs:range rdf:resource="#Artist"/>
+  <rdfs:domain rdf:resource="#Album"/>
+  <owl:inverseOf rdf:resource="#makeAnAlbum"/>
+  <owlr:python_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">artists</owlr:python_name>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">made by</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:Class rdf:about="#Artist">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Album"/>
+            <rdf:Description rdf:about="#Album"/>
+            <owl:Class>
+              <owl:oneOf rdf:parseType="Collection">
+                <rdf:Description rdf:about="#Kizuna_No_Kiseki(album)"/>
+                <rdf:Description rdf:about="#Miracle_Milk"/>
+                <rdf:Description rdf:about="#Kizuna_No_Kiseki(album)"/>
+                <rdf:Description rdf:about="#Dark_Crow(album)"/>
+              </owl:oneOf>
+            </owl:Class>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#makeAnAlbum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Song"/>
+            <rdf:Description rdf:about="#Song"/>
+            <owl:Class>
+              <owl:oneOf rdf:parseType="Collection">
+                <rdf:Description rdf:about="#Kizuna_No_Kiseki"/>
+                <rdf:Description rdf:about="#Sl0t"/>
+                <rdf:Description rdf:about="#RTRT"/>
+                <rdf:Description rdf:about="#world.execute(me);"/>
+                <rdf:Description rdf:about="#Kizuna_No_Kiseki"/>
+                <rdf:Description rdf:about="#Dark_Crow"/>
+                <rdf:Description rdf:about="#My_Hero[Slushii_Remix]"/>
+              </owl:oneOf>
+            </owl:Class>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#singAsong"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Class>
+      <owl:oneOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#milet"/>
+        <rdf:Description rdf:about="#Mili"/>
+        <rdf:Description rdf:about="#MAN_WITH_A_MISSION"/>
+      </owl:oneOf>
+    </owl:Class>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">artist</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#Album">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">album</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#Song">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Album"/>
+            <owl:Class>
+              <owl:oneOf rdf:parseType="Collection">
+                <rdf:Description rdf:about="#Miracle_Milk"/>
+                <rdf:Description rdf:about="#Miracle_Milk"/>
+                <rdf:Description rdf:about="#Dark_Crow(album)"/>
+                <rdf:Description rdf:about="#Miracle_Milk"/>
+                <rdf:Description rdf:about="#Kizuna_No_Kiseki(album)"/>
+                <rdf:Description rdf:about="#Dark_Crow(album)"/>
+              </owl:oneOf>
+            </owl:Class>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#inAlbum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Artist"/>
+            <owl:Class>
+              <owl:oneOf rdf:parseType="Collection">
+                <rdf:Description rdf:about="#Mili"/>
+                <rdf:Description rdf:about="#Mili"/>
+                <rdf:Description rdf:about="#MAN_WITH_A_MISSION"/>
+                <rdf:Description rdf:about="#Mili"/>
+                <rdf:Description rdf:about="#milet"/>
+                <rdf:Description rdf:about="#MAN_WITH_A_MISSION"/>
+                <rdf:Description rdf:about="#MAN_WITH_A_MISSION"/>
+              </owl:oneOf>
+            </owl:Class>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#performedBy"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Class>
+      <owl:oneOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Sl0t"/>
+        <rdf:Description rdf:about="#RTRT"/>
+        <rdf:Description rdf:about="#Dark_Crow"/>
+        <rdf:Description rdf:about="#world.execute(me);"/>
+        <rdf:Description rdf:about="#Kizuna_No_Kiseki"/>
+        <rdf:Description rdf:about="#My_Hero[Slushii_Remix]"/>
+      </owl:oneOf>
+    </owl:Class>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">song</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#Collab">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Album"/>
+      <owl:onProperty rdf:resource="#inAlbum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Artist"/>
+      <owl:onProperty rdf:resource="#performedBy"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Song"/>
+        <owl:Restriction>
+          <owl:onClass rdf:resource="#Artist"/>
+          <owl:onProperty rdf:resource="#performedBy"/>
+          <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:someValuesFrom rdf:resource="#Album"/>
+          <owl:onProperty rdf:resource="#inAlbum"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Song"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">collab song</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#CollabAlbum">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Album"/>
+        <owl:Restriction>
+          <owl:onClass rdf:resource="#Artist"/>
+          <owl:onProperty rdf:resource="#madeBy"/>
+          <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:someValuesFrom rdf:resource="#Song"/>
+          <owl:onProperty rdf:resource="#songsInAlbum"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Album"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">collab album</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#Single">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Album"/>
+        <owl:Restriction>
+          <owl:onClass rdf:resource="#Song"/>
+          <owl:onProperty rdf:resource="#songsInAlbum"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:someValuesFrom rdf:resource="#Artist"/>
+          <owl:onProperty rdf:resource="#madeBy"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Album"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">single</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#OneHitWonder">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Album"/>
+      <owl:onProperty rdf:resource="#makeAnAlbum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Song"/>
+      <owl:onProperty rdf:resource="#singAsong"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Artist"/>
+        <owl:Restriction>
+          <owl:onClass rdf:resource="#Song"/>
+          <owl:onProperty rdf:resource="#singAsong"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:someValuesFrom rdf:resource="#Album"/>
+          <owl:onProperty rdf:resource="#makeAnAlbum"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Artist"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">one hit wonder</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#ManyCoolTracks">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Album"/>
+      <owl:onProperty rdf:resource="#makeAnAlbum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:allValuesFrom rdf:resource="#Song"/>
+      <owl:onProperty rdf:resource="#singAsong"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Artist"/>
+        <owl:Restriction>
+          <owl:onClass rdf:resource="#Song"/>
+          <owl:onProperty rdf:resource="#singAsong"/>
+          <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:minQualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:someValuesFrom rdf:resource="#Album"/>
+          <owl:onProperty rdf:resource="#makeAnAlbum"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Artist"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has a lot of cool tracks</rdfs:label>
+</owl:Class>
+
+<owl:NamedIndividual rdf:about="#Kizuna_No_Kiseki">
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Kizuna_No_Kiseki(album)"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#inAlbum"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#milet"/>
+            <rdf:Description rdf:about="#MAN_WITH_A_MISSION"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#performedBy"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type rdf:resource="#Song"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Dark_Crow">
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Dark_Crow(album)"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#inAlbum"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#MAN_WITH_A_MISSION"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#performedBy"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type rdf:resource="#Song"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#My_Hero[Slushii_Remix]">
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Dark_Crow(album)"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#inAlbum"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#MAN_WITH_A_MISSION"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#performedBy"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type rdf:resource="#Song"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Sl0t">
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Miracle_Milk"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#inAlbum"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Mili"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#performedBy"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type rdf:resource="#Song"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#RTRT">
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Miracle_Milk"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#inAlbum"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Mili"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#performedBy"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type rdf:resource="#Song"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#world.execute(me);">
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Miracle_Milk"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#inAlbum"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Mili"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#performedBy"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type rdf:resource="#Song"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Kizuna_No_Kiseki(album)">
+  <rdf:type rdf:resource="#Album"/>
+  <songsInAlbum rdf:resource="#Kizuna_No_Kiseki"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Dark_Crow(album)">
+  <rdf:type rdf:resource="#Album"/>
+  <songsInAlbum rdf:resource="#Dark_Crow"/>
+  <songsInAlbum rdf:resource="#My_Hero[Slushii_Remix]"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Miracle_Milk">
+  <rdf:type rdf:resource="#Album"/>
+  <songsInAlbum rdf:resource="#Sl0t"/>
+  <songsInAlbum rdf:resource="#RTRT"/>
+  <songsInAlbum rdf:resource="#world.execute(me);"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#milet">
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Kizuna_No_Kiseki(album)"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#makeAnAlbum"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Kizuna_No_Kiseki"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#singAsong"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type rdf:resource="#Artist"/>
+  <singAsong rdf:resource="#Kizuna_No_Kiseki"/>
+  <makeAnAlbum rdf:resource="#Kizuna_No_Kiseki(album)"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#MAN_WITH_A_MISSION">
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Kizuna_No_Kiseki(album)"/>
+            <rdf:Description rdf:about="#Dark_Crow(album)"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#makeAnAlbum"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Kizuna_No_Kiseki"/>
+            <rdf:Description rdf:about="#Dark_Crow"/>
+            <rdf:Description rdf:about="#My_Hero[Slushii_Remix]"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#singAsong"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type rdf:resource="#Artist"/>
+  <singAsong rdf:resource="#Kizuna_No_Kiseki"/>
+  <singAsong rdf:resource="#Dark_Crow"/>
+  <singAsong rdf:resource="#My_Hero[Slushii_Remix]"/>
+  <makeAnAlbum rdf:resource="#Kizuna_No_Kiseki(album)"/>
+  <makeAnAlbum rdf:resource="#Dark_Crow(album)"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Mili">
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Miracle_Milk"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#makeAnAlbum"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#Sl0t"/>
+            <rdf:Description rdf:about="#RTRT"/>
+            <rdf:Description rdf:about="#world.execute(me);"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+      <owl:onProperty rdf:resource="#singAsong"/>
+    </owl:Restriction>
+  </rdf:type>
+  <rdf:type rdf:resource="#Artist"/>
+  <singAsong rdf:resource="#Sl0t"/>
+  <singAsong rdf:resource="#RTRT"/>
+  <singAsong rdf:resource="#world.execute(me);"/>
+  <makeAnAlbum rdf:resource="#Miracle_Milk"/>
+</owl:NamedIndividual>
+
+<owl:AllDifferent>
+  <owl:distinctMembers rdf:parseType="Collection">
+    <rdf:Description rdf:about="#milet"/>
+    <rdf:Description rdf:about="#MAN_WITH_A_MISSION"/>
+    <rdf:Description rdf:about="#Mili"/>
+  </owl:distinctMembers>
+</owl:AllDifferent>
+
+<owl:AllDifferent>
+  <owl:distinctMembers rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Kizuna_No_Kiseki(album)"/>
+    <rdf:Description rdf:about="#Dark_Crow(album)"/>
+    <rdf:Description rdf:about="#Miracle_Milk"/>
+  </owl:distinctMembers>
+</owl:AllDifferent>
+
+<owl:AllDifferent>
+  <owl:distinctMembers rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Kizuna_No_Kiseki"/>
+    <rdf:Description rdf:about="#Dark_Crow"/>
+    <rdf:Description rdf:about="#My_Hero[Slushii_Remix]"/>
+    <rdf:Description rdf:about="#Sl0t"/>
+    <rdf:Description rdf:about="#RTRT"/>
+    <rdf:Description rdf:about="#world.execute(me);"/>
+  </owl:distinctMembers>
+</owl:AllDifferent>
+
+
+</rdf:RDF>
